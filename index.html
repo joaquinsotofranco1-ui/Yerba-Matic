@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YerbaMatic | Sistema Automatizado para Procesamiento de Yerba Mate</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1b4332;
+            --secondary: #2d6a4f;
+            --accent: #52b788;
+            --light: #f4f9f4;
+            --dark: #1b1b1b;
+            --gray: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* HEADER */
+        header {
+            background: rgba(27, 67, 50, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .btn-whatsapp-nav {
+            background-color: #25d366;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .btn-whatsapp-nav:hover {
+            background-color: #1ebe5d;
+            transform: translateY(-2px);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(rgba(27, 67, 50, 0.85), rgba(45, 106, 79, 0.85)), url('https://i.ibb.co/qFLy8QrF/imagen.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 12rem 2rem 7rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: #e2e8f0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.9rem 2.2rem;
+            border-radius: 5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #40916c;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* SECTIONS GENERAL */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* QUIÉNES SOMOS & ESTUDIANTES */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1.2rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.2rem;
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+
+        .team-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--accent);
+        }
+
+        .team-box h4 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .team-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .team-list li {
+            background: var(--light);
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.95rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        /* LA MÁQUINA & PLANO 3D */
+        .machine-section-wrapper {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 5rem 2rem;
+            margin: 4rem auto;
+        }
+
+        .machine-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .machine-img-container {
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            padding: 1.2rem;
+        }
+
+        .machine-img-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .machine-img-container span {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: var(--accent);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .step-content p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* VENTAJAS COMPETITIVAS */
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .advantage-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .advantage-card i {
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .advantage-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .advantage-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* CONTACTO Y COMPRA */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 20px;
+            padding: 5rem 3rem;
+            text-align: center;
+            margin-top: 5rem;
+            box-shadow: 0 15px 35px rgba(27,67,50,0.2);
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-section p {
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto 3rem;
+            color: #e2e8f0;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-contact {
+            background: white;
+            color: var(--primary);
+            padding: 1.1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .btn-contact:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-contact.whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .btn-contact.whatsapp:hover {
+            background: #1ebe5d;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            color: #a0aec0;
+            text-align: center;
+            padding: 2.5rem;
+            margin-top: 5rem;
+            font-size: 0.95rem;
+        }
+
+        footer span {
+            color: white;
+            font-weight: 600;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-container nav {
+                display: none;
+            }
+            .about-grid, .machine-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo-container">
+                <img src="https://i.ibb.co/8LngxLZY/logo.jpg" alt="Logo YerbaMatic" class="logo-img">
+                <div class="logo-text">Yerba<span>Matic</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Institucional</a></li>
+                    <li><a href="#maquina">Tecnología</a></li>
+                    <li><a href="#ventajas">Ventajas</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <a href="https://wa.me/549XXXXXXXXXX?text=Hola,%20deseo%20realizar%20una%20consulta%20comercial%20sobre%20YerbaMatic" target="_blank" class="btn-whatsapp-nav">
+                <i class="fa-brands fa-whatsapp"></i> Soporte
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Soluciones Tecnológicas para la Industria Yerbatera</h1>
+            <p>Desarrollo de maquinaria industrial compacta de alta precisión orientada a pequeños productores y emprendedores. Automatizamos el proceso de molienda, clasificación y envasado en una sola estación continua.</p>
+            <div class="hero-buttons">
+                <a href="#maquina" class="btn btn-primary">Conocer la Máquina</a>
+                <a href="#contacto" class="btn btn-outline">Contacto Comercial</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIÉNES SOMOS -->
+    <section id="nosotros">
+        <div class="section-title">
+            <h2>Nuestra Identidad Institucional</h2>
+            <p>Innovación técnica e ingeniería aplicada desde la educación técnica nacional.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>Compromiso con el Desarrollo Productivo</h3>
+                <p><strong>YerbaMatic</strong> surge como un proyecto tecnológico integral desarrollado por estudiantes avanzados de la <strong>ENET</strong>. Nuestra misión es potenciar la autonomía de los productores y emprendedores regionales, facilitando el acceso a tecnología de automatización industrial eficiente y de bajo costo operativo.</p>
+                <p>Mediante un diseño mecánico riguroso y optimización de recursos, integramos los eslabones clave del procesamiento de yerba mate en un único equipo automatizado.</p>
+            </div>
+            <div class="team-box">
+                <h4><i class="fa-solid fa-users-gear"></i> Equipo de Ingeniería y Desarrollo</h4>
+                <ul class="team-list">
+                    <li>Joaquín Soto</li>
+                    <li>Juan Palacio</li>
+                    <li>Emily Romero</li>
+                    <li>Mia Morales</li>
+                    <li>Delfina Toledano</li>
+                    <li>Ana Roth</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- LA MÁQUINA Y PROCESO -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;" id="maquina">
+        <div class="machine-section-wrapper">
+            <div class="section-title">
+                <h2>Arquitectura y Proceso Productivo</h2>
+                <p>Ingeniería de precisión compactada en una estación unificada de alto rendimiento.</p>
+            </div>
+
+            <div class="machine-grid">
+                <div class="machine-img-container">
+                    <img src="image_a6a9fb.png" alt="Diseño estructural y plano 3D de YerbaMatic">
+                    <span>Plano Técnico 3D: Estructura metálica, tolva de alimentación, unidades motrices y tablero de control centralizado.</span>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Molienda de Yerba Canchada</h4>
+                            <p>El sistema recibe la materia prima y efectúa una trituración homogénea regulada según los estándares de granulometría óptimos.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Tamizado y Regulación de Polvo</h4>
+                            <p>Cuenta con un mecanismo de zaranda integrado que separa y regula el exceso de polvillo, garantizando una infusión equilibrada y de calidad superior.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Dosificación y Envasado</h4>
+                            <p>El producto final procesado se descarga de forma limpia y directa en el envase comercial, asegurando un flujo de trabajo continuo y sin pérdidas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VENTAJAS -->
+    <section id="ventajas">
+        <div class="section-title">
+            <h2>Ventajas Competitivas</h2>
+            <p>Propuesta de valor frente a la maquinaria industrial tradicional fraccionada.</p>
+        </div>
+        <div class="advantages-grid">
+            <div class="advantage-card">
+                <i class="fa-solid fa-chart-line"></i>
+                <h3>Inversión Eficiente</h3>
+                <p>Representa una fracción del costo económico que implica adquirir y mantener tres equipos industriales independientes.</p>
+            </div>
+            <div class="advantage-card">
+                <i class="fa-solid fa-maximize"></i>
+                <h3>Optimización Espacial</h3>
+                <p>Estructura vertical optimizada que reduce significativamente los requerimientos de superficie operativa en planta.</p>
+            </div>
+            <div class="advantage-card">
+                <i class="fa-solid fa-sliders"></i>
+                <h3>Control Centralizado</h3>
+                <p>Operación intuitiva gestionada mediante un tablero eléctrico con botonera de arranque y parada, apta para ser operada por una sola persona.</p>
+            </div>
+            <div class="advantage-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Proceso Estanco y Limpio</h3>
+                <p>Diseño cerrado que evita la dispersión de partículas al ambiente, resguardando la higiene del producto y minimizando el desperdicio de materia prima.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" style="padding-bottom: 2rem;">
+        <div class="contact-section">
+            <h2>Canales de Consulta y Asesoramiento Técnico</h2>
+            <p>Póngase en contacto con nuestro equipo de desarrollo para recibir especificaciones técnicas detalladas, cotizaciones y propuestas comerciales orientadas a su emprendimiento.</p>
+            <div class="contact-buttons">
+                <a href="https://wa.me/549XXXXXXXXXX?text=Hola,%20solicito%20información%20técnica%20y%20comercial%20sobre%20el%20sistema%20YerbaMatic" target="_blank" class="btn-contact whatsapp">
+                    <i class="fa-brands fa-whatsapp fa-lg"></i> Consultar vía WhatsApp
+                </a>
+                <a href="mailto:contacto@yerbamatic.com" class="btn-contact">
+                    <i class="fa-solid fa-envelope fa-lg"></i> Enviar Correo Electrónico
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 <span>YerbaMatic</span> - Desarrollado por estudiantes de la ENET. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
